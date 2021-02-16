@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnManager : MonoBehaviour
+public class EnemySpawnManager : Loader<EnemySpawnManager>
 {
     #region Firlds
 
-    public static EnemySpawnManager instance = null;
 
     Timer spawnTimer;
 
