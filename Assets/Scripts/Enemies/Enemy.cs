@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         finish = GameObject.FindGameObjectWithTag("Finish");
+        Destroy(moveingPoints[0].gameObject);
     }
 
     // Start is called before the first frame update

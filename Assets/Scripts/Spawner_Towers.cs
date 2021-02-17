@@ -6,23 +6,28 @@ using System;
 public class Spawner_Towers : MonoBehaviour
 {
     #region Fields
+    private GameObject menuTowerSelection;  // Меню выбора башни
+    private Canvas canvasTowerSelection;    // Канвас для меню выбора башни
 
     [SerializeField]
     private GameObject[] towerKind;     // Все виды башен
 
-    GameObject objectForSpawn;  // Башня для спавна
-    Sprite towerSprite;
+    private GameObject objectForSpawn;  // Башня для спавна
 
-    Vector2 mousePosition;
-    RaycastHit2D hit;   // Луч для правильного выбора позиции спавна
+    private RaycastHit2D hit;   // Луч для правильного выбора позиции спавна
+    private Vector2 mousePosition;  // Позиция мыши
+    private GameObject towerSide;   // Подходящее для спавна башни место
     #endregion
 
     #region Methods
     private void Awake()
     {
+        menuTowerSelection = GameObject.FindGameObjectWithTag("Menu_TowerSelection");
+        canvasTowerSelection = GameObject.FindGameObjectWithTag("Canvas_TowerSelection").GetComponent<Canvas>();
+        canvasTowerSelection.enabled = false;
 
     }
-    public void SelectObjectForSpawn(Enum_Towers tower)
+    public void SelectObjectForSpawn(Enum_Towers tower) // Эта функция сработает при выборе башни
     {
         switch (tower)
         {
@@ -38,31 +43,36 @@ public class Spawner_Towers : MonoBehaviour
                 objectForSpawn = towerKind[2];
                 break;
         }
-        towerSprite = objectForSpawn.GetComponent<SpriteRenderer>().sprite;
-        Instantiate(towerSprite);
+        Spawn();
     }
 
     private void Update()
     {
-        //spriteRenderer.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //spriteRenderer.transform.position = new Vector2(transform.position.x, transform.position.y);
 
         if (Input.GetMouseButtonDown(0))
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+            hit = Physics2D.Raycast(mousePosition, Vector2.zero);   // Луч из точки 0,0 до mousePosition
 
-            if (hit.collider.CompareTag("TowerSide") && objectForSpawn)
+            if (hit.collider.CompareTag("TowerSide"))
             {
-                hit.collider.tag = "TowerSideFull";     // Меняем тег сайда, чтобы нельзя было спавнить на этом сайде повторно
-                Spawn();
+                towerSide = hit.collider.gameObject;
+                ShowMenuTowerSelection();
             }
         }
     }
 
+    private void ShowMenuTowerSelection()   // Если клик на место для башни, то показать меню выбора башни
+    {
+        menuTowerSelection.transform.position = towerSide.transform.position;    // Передвигаем меню выбора башни к месту для спавна
+        canvasTowerSelection.enabled = true;    // Включаем меню, делаем видимым
+    }
+
     private void Spawn()
     {
-        Instantiate(objectForSpawn, hit.transform.position, Quaternion.identity);
+        towerSide.tag = "TowerSideFull";     // Меняем тег сайда, чтобы нельзя было спавнить на этом сайде повторно
+        Instantiate(objectForSpawn, towerSide.transform.position, Quaternion.identity);
+        canvasTowerSelection.enabled = false;
     }
 
     #endregion
