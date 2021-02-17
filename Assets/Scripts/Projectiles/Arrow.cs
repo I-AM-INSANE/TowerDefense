@@ -14,21 +14,24 @@ public class Arrow : Abstract_Projectile
 
     protected override void Update()
     {
-        if (!stop)
+        if (Target)
         {
-            projectileRotation = closestEnemy.transform.position - transform.position;
-            projectileRotation.Normalize();
-            transform.right = projectileRotation;
-        }
+            transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, speed * Time.deltaTime);
 
-        if (closestEnemy)
-            transform.position = Vector3.MoveTowards(transform.position, closestEnemy.transform.position, speed * Time.deltaTime);
+            if (!stop)
+            {
+                projectileRotation = Target.transform.position - transform.position;
+                projectileRotation.Normalize();
+                transform.right = projectileRotation;
+            }
+        }
         else
             Destroy(gameObject);
     }
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("ClosestEnemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
             stop = true;
     }
 

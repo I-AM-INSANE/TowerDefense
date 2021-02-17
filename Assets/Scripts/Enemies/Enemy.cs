@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private GameObject[] moveingPoints;
     private int targetPoint = 0;
 
-    protected float enemySpeed = 1f;
+    protected float enemySpeed = 2f;
 
     #endregion
     private void Awake()

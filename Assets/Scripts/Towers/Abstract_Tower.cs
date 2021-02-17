@@ -13,19 +13,13 @@ public abstract class Abstract_Tower : MonoBehaviour
     private GameObject closestEnemy;    // Ближайший враг для атаки
     private float closestEnemyDistance = float.MaxValue;    // Дистанция до ближайшего врага для атаки
 
-    private Vector3 attackDirection;    // Направление для атаки
-
     private Timer timerAttackDelay;     // Таймер для задержки между атакой
     protected float attackDelay = 1f;   // Величина задержки между атакой
     #endregion
 
     #region Properties
 
-    public GameObject ClosestEnemy
-    {
-        get { return closestEnemy; }
-        set { ClosestEnemy = closestEnemy; }
-    }
+
 
     #endregion
 
@@ -61,14 +55,12 @@ public abstract class Abstract_Tower : MonoBehaviour
 
             if (tempDistance <= attackRadius && tempDistance < closestEnemyDistance)
             {
-                enemy.tag = "ClosestEnemy";
                 closestEnemyDistance = tempDistance;
                 closestEnemy = enemy;
             }
         }
         if (closestEnemy && Vector3.Distance(closestEnemy.transform.position, transform.position) > attackRadius) // Если ближайший враг вышел за радиус атаки
         {
-            closestEnemy.tag = "Enemy";
             closestEnemy = null;
             closestEnemyDistance = float.MaxValue;
         }

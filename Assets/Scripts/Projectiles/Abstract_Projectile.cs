@@ -7,39 +7,27 @@ public class Abstract_Projectile : MonoBehaviour
     #region Fields
 
     protected float speed = 5f;
-    private float closestEnemyDistance = float.MaxValue;
-    protected GameObject closestEnemy;
-    private GameObject[] closestEnemies;
 
     protected Vector3 projectileRotation;
 
     #endregion
-    public GameObject Target 
-    {
-        set { Target = value; } 
-    }
+    public GameObject Target { get; set; }
+
     #region Methods
 
     protected void Start()
     {
-        closestEnemies = GameObject.FindGameObjectsWithTag("ClosestEnemy");
-        foreach (GameObject enemy in closestEnemies)
-        {
-            if (Vector3.Distance(enemy.transform.position, transform.position) < closestEnemyDistance)
-            {
-                closestEnemyDistance = Vector3.Distance(enemy.transform.position, transform.position);
-                closestEnemy = enemy;
-            }
-        }
     }
     protected virtual void Update()
     {
-        projectileRotation = closestEnemy.transform.position - transform.position;
-        projectileRotation.Normalize();
-        transform.right = projectileRotation;
+        if (Target)
+        {
+            projectileRotation = Target.transform.position - transform.position;
+            projectileRotation.Normalize();
+            transform.right = projectileRotation;
 
-        if (closestEnemy)
-            transform.position = Vector3.MoveTowards(transform.position, closestEnemy.transform.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, speed * Time.deltaTime);
+        }
         else
             Destroy(gameObject);
     }
@@ -51,7 +39,7 @@ public class Abstract_Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("ClosestEnemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
             Destroy(gameObject);
     }
 

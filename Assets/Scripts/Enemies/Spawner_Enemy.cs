@@ -31,7 +31,7 @@ public class Spawner_Enemy : MonoBehaviour
     {
         EnemiesOnScreen = new List<GameObject>();
         spawnTimer = gameObject.AddComponent<Timer>();
-        spawnTimer.Duration = 3f;
+        spawnTimer.Duration = 2f;
         spawnTimer.Run();
     }
 
