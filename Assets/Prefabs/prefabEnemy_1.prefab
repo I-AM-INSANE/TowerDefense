@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3760826600859126662}
   - component: {fileID: 2505615377026984738}
   m_Layer: 8
-  m_Name: prefabEnemy_2
-  m_TagString: Untagged
+  m_Name: prefabEnemy_1
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,13 +163,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e1cf66998160e439831e5620cb4307, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveingPoints:
-  - {fileID: 5538097581978445070, guid: d61a42d3213b417428775f4cb65c14a0, type: 3}
-  - {fileID: 9185688137440645817, guid: 910f990f71b775c418cb52fcb7ae37d0, type: 3}
-  - {fileID: 7411146360745128103, guid: abc11db8e4b588049b5b13e046cf6933, type: 3}
-  - {fileID: 2280529626692171426, guid: ade1739da3fa33c44a6d59aafb79b133, type: 3}
-  - {fileID: 4766884926547324393, guid: 390b612698751d041876da0af527857b, type: 3}
-  - {fileID: 2222365131654876699, guid: a71580ca57de0ad42b827f7501bbc28b, type: 3}
-  - {fileID: 5475698189573306669, guid: 75c7eb93e487bb5408a1ea83573b8aa4, type: 3}
-  - {fileID: 3424325167458550872, guid: e2fbaaa2450538049aae4ffeba50a5ce, type: 3}
-  - {fileID: 3104498850927703807, guid: d3a09edb446ca0c41a4b4a9e951c3002, type: 3}

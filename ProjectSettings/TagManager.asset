@@ -12,6 +12,9 @@ TagManager:
   - TowerSideFull
   - Menu_TowerSelection
   - Canvas_TowerSelection
+  - Projectile
+  - Enemy
+  - ClosestEnemy
   layers:
   - Default
   - TransparentFX

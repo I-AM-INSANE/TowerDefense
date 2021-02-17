@@ -21,7 +21,7 @@ public class Spawner_Enemy : MonoBehaviour
 
     #region Properties
 
-    public static int EnemiesOnScreen { get; set; }
+    public static List<GameObject> EnemiesOnScreen { get; set; }
 
     #endregion
 
@@ -29,14 +29,16 @@ public class Spawner_Enemy : MonoBehaviour
 
     private void Awake()
     {
+        EnemiesOnScreen = new List<GameObject>();
         spawnTimer = gameObject.AddComponent<Timer>();
-        spawnTimer.Duration = 1f;
+        spawnTimer.Duration = 3f;
         spawnTimer.Run();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -49,11 +51,10 @@ public class Spawner_Enemy : MonoBehaviour
     private void SpawnEnemy()
     {
         if (enemiesPerSpawn > 0 && enemyCounter < totalEnemies)
-            if (EnemiesOnScreen < maxEnemiesOnScreen)
+            if (EnemiesOnScreen.Count < maxEnemiesOnScreen)
                 for (int i = 0; i < enemiesPerSpawn; i++)
                 {
-                    Instantiate(enemyTypes[Random.Range(0, 2)], enemySpawnPoint.transform.position, Quaternion.identity);
-                    EnemiesOnScreen++;
+                    EnemiesOnScreen.Add(Instantiate(enemyTypes[Random.Range(0, 2)], enemySpawnPoint.transform.position, Quaternion.identity));
                     enemyCounter++;
                 }
         spawnTimer.Run();

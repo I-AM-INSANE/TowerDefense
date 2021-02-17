@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private GameObject[] moveingPoints;
     private int targetPoint = 0;
 
-    protected float enemySpeed = 3;
+    protected float enemySpeed = 1f;
 
     #endregion
     private void Awake()
@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Finish"))
         {
             Destroy(gameObject);
-            Spawner_Enemy.EnemiesOnScreen--;
+            Spawner_Enemy.EnemiesOnScreen.Remove(gameObject);
         }
     }
 }
