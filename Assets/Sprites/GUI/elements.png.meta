@@ -7,7 +7,7 @@ TextureImporter:
     second: Button_0
   - first:
       213: -5391307981071726051
-    second: Button_
+    second: Button_1
   - first:
       213: -3293433503042108997
     second: Button_2
@@ -117,7 +117,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Button_
+      name: Button_1
       rect:
         serializedVersion: 2
         x: 1174
