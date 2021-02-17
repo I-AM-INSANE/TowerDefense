@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnManager : Loader<EnemySpawnManager>
+public class Spawner_Enemy : MonoBehaviour
 {
     #region Firlds
 

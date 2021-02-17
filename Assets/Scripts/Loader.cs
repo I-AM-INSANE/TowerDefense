@@ -16,15 +16,6 @@ public class Loader<T> : MonoBehaviour where T : MonoBehaviour
     {
         get 
         {
-            //T needObj = FindObjectOfType<T>();
-
-            //if (instance == null)
-            //    instance = needObj;
-            //else if (instance != needObj)
-            //    Destroy(needObj);
-
-            //DontDestroyOnLoad(needObj);
-
             return instance;
         }
     }

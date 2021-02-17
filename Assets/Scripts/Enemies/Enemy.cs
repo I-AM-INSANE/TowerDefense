@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     private GameObject finish;
 
-    [SerializeField] private GameObject[] moveingPoints;
+    private GameObject[] moveingPoints;
     private int targetPoint = 0;
 
     protected float enemySpeed = 3;
@@ -18,13 +18,12 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         finish = GameObject.FindGameObjectWithTag("Finish");
-        Destroy(moveingPoints[0].gameObject);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        moveingPoints = GameObject.FindGameObjectsWithTag("MoveingPoint");
     }
 
     // Update is called once per frame
@@ -49,7 +48,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Finish"))
         {
             Destroy(gameObject);
-            EnemySpawnManager.EnemiesOnScreen--;
+            Spawner_Enemy.EnemiesOnScreen--;
         }
     }
 }

@@ -60,6 +60,8 @@ public class Spawner_Towers : MonoBehaviour
                 ShowMenuTowerSelection();
             }
         }
+        if (Input.GetMouseButtonDown(1))
+            canvasTowerSelection.enabled = false;
     }
 
     private void ShowMenuTowerSelection()   // Если клик на место для башни, то показать меню выбора башни
