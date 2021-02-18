@@ -31,17 +31,15 @@ public abstract class Abstract_Tower : MonoBehaviour
         timerAttackDelay.Duration = attackDelay;
         timerAttackDelay.Run();
     }
-    protected void Start()
-    {
-
-    }
 
     protected void Update()
     {
         if (Spawner_Enemy.EnemiesOnScreen.Count > 0)
+        {
             SearchClosestEnemy();
-        if (closestEnemy && timerAttackDelay.Finished)
-            Attack();
+            if (closestEnemy && timerAttackDelay.Finished)
+                Attack();
+        }
     }
 
     private void SearchClosestEnemy()   // Поиск ближайшего врага для атаки
@@ -58,11 +56,6 @@ public abstract class Abstract_Tower : MonoBehaviour
                 closestEnemyDistance = tempDistance;
                 closestEnemy = enemy;
             }
-        }
-        if (closestEnemy && Vector3.Distance(closestEnemy.transform.position, transform.position) > attackRadius) // Если ближайший враг вышел за радиус атаки
-        {
-            closestEnemy = null;
-            closestEnemyDistance = float.MaxValue;
         }
     }
 

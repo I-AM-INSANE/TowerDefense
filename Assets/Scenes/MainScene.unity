@@ -8191,10 +8191,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawnPoint: {fileID: 1380747267}
   enemyTypes:
-  - {fileID: 4242890137551237994, guid: ebd0adcdaa23d37448b303c79d528fc5, type: 3}
   - {fileID: 6406357680225771150, guid: 58d8a787676ba3743b3c6dd0e20e81b3, type: 3}
-  totalEnemies: 10
-  maxEnemiesOnScreen: 5
+  - {fileID: 4242890137551237994, guid: ebd0adcdaa23d37448b303c79d528fc5, type: 3}
+  - {fileID: 1726009137084482207, guid: 662ea8376adc6524db13e0c7de9c9841, type: 3}
+  totalEnemies: 30
+  maxEnemiesOnScreen: 10
   enemiesPerSpawn: 1
 --- !u!1 &527146148
 GameObject:

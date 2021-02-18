@@ -7,10 +7,14 @@ public class Arrow : Abstract_Projectile
     #region Fields
 
     private bool stop = false;
-
     #endregion
 
     #region Methods
+    private void Awake()
+    {
+        projectileDamage = 20;
+        speed = 10f;
+    }
 
     protected override void Update()
     {
@@ -32,7 +36,10 @@ public class Arrow : Abstract_Projectile
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
+        {
+            GetComponent<Collider2D>().enabled = false;
             stop = true;
+        }
     }
 
     #endregion

@@ -31,7 +31,7 @@ public class Spawner_Enemy : MonoBehaviour
     {
         EnemiesOnScreen = new List<GameObject>();
         spawnTimer = gameObject.AddComponent<Timer>();
-        spawnTimer.Duration = 2f;
+        spawnTimer.Duration = 1f;
         spawnTimer.Run();
     }
 
@@ -54,7 +54,7 @@ public class Spawner_Enemy : MonoBehaviour
             if (EnemiesOnScreen.Count < maxEnemiesOnScreen)
                 for (int i = 0; i < enemiesPerSpawn; i++)
                 {
-                    EnemiesOnScreen.Add(Instantiate(enemyTypes[Random.Range(0, 2)], enemySpawnPoint.transform.position, Quaternion.identity));
+                    EnemiesOnScreen.Add(Instantiate(enemyTypes[Random.Range(0, enemyTypes.Length)], enemySpawnPoint.transform.position, Quaternion.identity));
                     enemyCounter++;
                 }
         spawnTimer.Run();
