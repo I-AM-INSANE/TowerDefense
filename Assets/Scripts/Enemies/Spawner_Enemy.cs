@@ -13,7 +13,6 @@ public class Spawner_Enemy : MonoBehaviour
     [SerializeField] private GameObject[] enemyTypes;
     [SerializeField] private int totalEnemies;
     [SerializeField] private int maxEnemiesOnScreen;
-    [SerializeField] private int enemiesPerSpawn;
 
     private int enemyCounter = 0;
 
@@ -36,28 +35,34 @@ public class Spawner_Enemy : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
 
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (spawnTimer.Finished)
             SpawnEnemy();
+
+        if (enemyCounter == totalEnemies && EnemiesOnScreen.Count == 0)
+            BrakeBetweenWaves();
     }
 
     private void SpawnEnemy()
     {
-        if (enemiesPerSpawn > 0 && enemyCounter < totalEnemies)
-            if (EnemiesOnScreen.Count < maxEnemiesOnScreen)
-                for (int i = 0; i < enemiesPerSpawn; i++)
-                {
-                    EnemiesOnScreen.Add(Instantiate(enemyTypes[Random.Range(0, enemyTypes.Length)], enemySpawnPoint.transform.position, Quaternion.identity));
-                    enemyCounter++;
-                }
+        if (enemyCounter < totalEnemies && EnemiesOnScreen.Count < maxEnemiesOnScreen)
+            {
+                EnemiesOnScreen.Add(Instantiate(enemyTypes[Random.Range(0, enemyTypes.Length)], enemySpawnPoint.transform.position, Quaternion.identity));
+                enemyCounter++;
+            }
         spawnTimer.Run();
+    }
+
+    private void BrakeBetweenWaves()
+    {
+
     }
 
     #endregion

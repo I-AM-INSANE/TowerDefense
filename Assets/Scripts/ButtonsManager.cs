@@ -6,24 +6,30 @@ public class ButtonsManager : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] 
     private Spawner_Towers spawnerTowers;
 
     #endregion
 
     #region Methods
-
-    public void SpawnTower0()
+    private void Awake()
     {
-        spawnerTowers.SelectObjectForSpawn(Enum_Towers.Tower0);
+        spawnerTowers = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Spawner_Towers>();
     }
-    public void SpawnTower1()
+    public void SpawnTower_Fireball()
     {
-        spawnerTowers.SelectObjectForSpawn(Enum_Towers.Tower1);
+        spawnerTowers.SelectObjectForSpawn(Enum_Towers.Tower_Fireball);
     }
-    public void SpawnTower2()
+    public void SpawnTower_Arrow()
     {
-        spawnerTowers.SelectObjectForSpawn(Enum_Towers.Tower2);
+        spawnerTowers.SelectObjectForSpawn(Enum_Towers.Tower_Arrow);
+    }
+    public void SpawnTower_Rock()
+    {
+        spawnerTowers.SelectObjectForSpawn(Enum_Towers.Tower_Rock);
+    }
+    public void RestartOrNext()
+    {
+        //if ()
     }
 
     #endregion

@@ -13,7 +13,7 @@ public class Arrow : Abstract_Projectile
     private void Awake()
     {
         projectileDamage = 20;
-        speed = 10f;
+        speed = 15f;
     }
 
     protected override void Update()

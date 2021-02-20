@@ -58,6 +58,7 @@ public class Abstract_Enemy : MonoBehaviour
         {
             Destroy(gameObject);
             Spawner_Enemy.EnemiesOnScreen.Remove(gameObject);
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerInfo>().PlayerHealth--;
         }
 
         if (collision.gameObject.CompareTag("Projectile"))
@@ -65,7 +66,7 @@ public class Abstract_Enemy : MonoBehaviour
             if (health > 0)
             {
                 anim.Play("EnemyHurt");
-                health -= collision.gameObject.GetComponent<Abstract_Projectile>().ProjectileGamage;
+                health -= collision.gameObject.GetComponent<Abstract_Projectile>().ProjectileDamage;
             }
             if (health <= 0)
             {

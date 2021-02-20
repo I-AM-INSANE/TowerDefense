@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Enum_Towers
 {
-    Tower0,
-    Tower1,
-    Tower2,
+    Tower_Fireball,
+    Tower_Arrow,
+    Tower_Rock,
 }

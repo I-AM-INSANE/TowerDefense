@@ -9,46 +9,56 @@ public class Spawner_Towers : MonoBehaviour
     private GameObject menuTowerSelection;  // Меню выбора башни
     private Canvas canvasTowerSelection;    // Канвас для меню выбора башни
 
-    [SerializeField]
-    private GameObject[] towerKind;     // Все виды башен
+    [SerializeField] private GameObject prefabTower_Fireball;  // Башня с фаерболами
+    [SerializeField] private GameObject prefabTower_Arrow;     // Башня лучников
+    [SerializeField] private GameObject prefabTower_Rock;      // Башня с камнями
+
+    PlayerInfo playerInfo;  // Информация о параметрах игрока (ХП, монеты...)
 
     private GameObject objectForSpawn;  // Башня для спавна
 
     private RaycastHit2D hit;   // Луч для правильного выбора позиции спавна
     private Vector2 mousePosition;  // Позиция мыши
     private GameObject towerSide;   // Подходящее для спавна башни место
+
+    private int towerPrice;
     #endregion
 
     #region Methods
     private void Awake()
     {
+        playerInfo = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerInfo>();
+
         menuTowerSelection = GameObject.FindGameObjectWithTag("Menu_TowerSelection");
         canvasTowerSelection = GameObject.FindGameObjectWithTag("Canvas_TowerSelection").GetComponent<Canvas>();
         canvasTowerSelection.enabled = false;
-
     }
     public void SelectObjectForSpawn(Enum_Towers tower) // Эта функция сработает при выборе башни
     {
         switch (tower)
         {
-            case Enum_Towers.Tower0:
-                objectForSpawn = towerKind[0];
+            case Enum_Towers.Tower_Fireball:
+                objectForSpawn = prefabTower_Fireball;
+                towerPrice = objectForSpawn.GetComponent<Tower_Fireball>().TowerPrice;
                 break;
 
-            case Enum_Towers.Tower1:
-                objectForSpawn = towerKind[1];
+            case Enum_Towers.Tower_Arrow:
+                objectForSpawn = prefabTower_Arrow;
+                towerPrice = objectForSpawn.GetComponent<Tower_Arrow>().TowerPrice;
                 break;
 
-            case Enum_Towers.Tower2:
-                objectForSpawn = towerKind[2];
+            case Enum_Towers.Tower_Rock:
+                objectForSpawn = prefabTower_Rock;
+                towerPrice = objectForSpawn.GetComponent<Tower_Rock>().TowerPrice;
                 break;
         }
-        Spawn();
-    }
 
+        if (playerInfo.PlayerMoney >= towerPrice)
+            Spawn();
+    }
+    
     private void Update()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -74,7 +84,9 @@ public class Spawner_Towers : MonoBehaviour
     {
         towerSide.tag = "TowerSideFull";     // Меняем тег сайда, чтобы нельзя было спавнить на этом сайде повторно
         Instantiate(objectForSpawn, towerSide.transform.position, Quaternion.identity);
+        playerInfo.PlayerMoney -= towerPrice;
         canvasTowerSelection.enabled = false;
+        objectForSpawn = null;
     }
 
     #endregion

@@ -19,20 +19,20 @@ public abstract class Abstract_Tower : MonoBehaviour
 
     #region Properties
 
-
+    public abstract int TowerPrice { get; }
 
     #endregion
 
     #region Methods
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         timerAttackDelay = gameObject.AddComponent<Timer>();
         timerAttackDelay.Duration = attackDelay;
         timerAttackDelay.Run();
     }
 
-    protected void Update()
+    private void Update()
     {
         if (Spawner_Enemy.EnemiesOnScreen.Count > 0)
         {

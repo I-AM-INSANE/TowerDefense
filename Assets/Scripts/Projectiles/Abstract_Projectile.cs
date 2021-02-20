@@ -7,7 +7,7 @@ public class Abstract_Projectile : MonoBehaviour
     #region Fields
     private Timer destroyOverTimeTimer; // Для уничтожения снаряда с течением времени
 
-    protected float speed = 5f;
+    protected float speed = 1f;
   
     protected Vector3 projectileRotation;
     protected int projectileDamage; // Урон от снаряда
@@ -17,7 +17,7 @@ public class Abstract_Projectile : MonoBehaviour
     #region Properties
     public GameObject Target { get; set; }
 
-    public int ProjectileGamage
+    public int ProjectileDamage
     {
         get { return projectileDamage; }
     }
