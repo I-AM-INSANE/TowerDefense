@@ -18,6 +18,7 @@ public class HUD : MonoBehaviour
     int playerMoney;    // Монеты игрока
     int playerHealth;   // Здоровье игрока
     const string WavePrefix = "Wave: ";
+    const string WavePostfix = "/3";
 
     private PlayerInfo playerInfo;
 
@@ -37,7 +38,7 @@ public class HUD : MonoBehaviour
         playerMoney = playerInfo.PlayerMoney;
         playerHealth = playerInfo.PlayerHealth;
 
-        waveText.text = WavePrefix + wave;
+        waveText.text = WavePrefix + wave + WavePostfix;
         moneyText.text = playerMoney.ToString();
         healthText.text = playerHealth.ToString();
     }

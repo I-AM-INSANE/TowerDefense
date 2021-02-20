@@ -7,6 +7,7 @@ public class ButtonsManager : MonoBehaviour
     #region Fields
 
     private Spawner_Towers spawnerTowers;
+    private Spawner_Enemy spawnerEnemy;
 
     #endregion
 
@@ -14,6 +15,7 @@ public class ButtonsManager : MonoBehaviour
     private void Awake()
     {
         spawnerTowers = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Spawner_Towers>();
+        spawnerEnemy = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Spawner_Enemy>();
     }
     public void SpawnTower_Fireball()
     {
@@ -26,6 +28,10 @@ public class ButtonsManager : MonoBehaviour
     public void SpawnTower_Rock()
     {
         spawnerTowers.SelectObjectForSpawn(Enum_Towers.Tower_Rock);
+    }
+    public void NextWave()
+    {
+        spawnerEnemy.GoToNextWave();
     }
     public void RestartOrNext()
     {
