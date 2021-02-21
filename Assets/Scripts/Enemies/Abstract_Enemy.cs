@@ -24,7 +24,7 @@ public class Abstract_Enemy : MonoBehaviour
     #region Methods
     private void Start()
     {
-        moveingPoints = GameObject.FindGameObjectsWithTag("MoveingPoint");
+        moveingPoints = Resources.LoadAll<GameObject>("MoveingPoints_Level1");
 
         anim = GetComponent<Animator>();
         finish = GameObject.FindGameObjectWithTag("Finish");
