@@ -36,7 +36,12 @@ public abstract class Abstract_Tower : MonoBehaviour
     {
         if (Spawner_Enemy.EnemiesOnScreen.Count > 0)
         {
-            SearchClosestEnemy();
+            if (closestEnemy)
+                closestEnemyDistance = Vector3.Distance(closestEnemy.transform.position, transform.position);
+
+            if (closestEnemyDistance > attackRadius || closestEnemy.GetComponent<Collider2D>().enabled == false)
+                SearchClosestEnemy();
+
             if (closestEnemy && timerAttackDelay.Finished)
                 Attack();
         }
