@@ -8,6 +8,7 @@ public class ButtonsManager : MonoBehaviour
 
     private Spawner_Towers spawnerTowers;
     private Spawner_Enemy spawnerEnemy;
+    private StateManager stateManager;
 
     #endregion
 
@@ -16,6 +17,7 @@ public class ButtonsManager : MonoBehaviour
     {
         spawnerTowers = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Spawner_Towers>();
         spawnerEnemy = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Spawner_Enemy>();
+        stateManager = Camera.main.GetComponent<StateManager>();
     }
     public void SpawnTower_Fireball()
     {
@@ -31,11 +33,21 @@ public class ButtonsManager : MonoBehaviour
     }
     public void NextWave()
     {
+        Time.timeScale = 1;
         spawnerEnemy.GoToNextWave();
     }
-    public void RestartOrNext()
+    
+    public void Resume()
     {
-        //if ()
+        stateManager.PauseState(false);
+    }
+    public void RestartGame()
+    {
+        stateManager.RestartGame();
+    }
+    public void GoToMainMenu()
+    {
+        stateManager.MainMenu();
     }
 
     #endregion

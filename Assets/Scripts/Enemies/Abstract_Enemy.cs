@@ -19,6 +19,8 @@ public class Abstract_Enemy : MonoBehaviour
     Timer destroyEnemyTimer;    // Для уничтожения умерших врагов
 
     private bool isDead = false;
+
+    protected int goldForThisEnemy;
     #endregion
 
     #region Methods
@@ -75,6 +77,7 @@ public class Abstract_Enemy : MonoBehaviour
                 destroyEnemyTimer.Run(); 
                 GetComponent<Collider2D>().enabled = false; // Если объект умер, отключаем взаимодействие с ним
                 Spawner_Enemy.EnemiesOnScreen.Remove(gameObject);   // Чтобы не выбирать объект в качестве closestTarget в Abstract_Tower
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerInfo>().PlayerMoney += goldForThisEnemy;
             }
         }
     }

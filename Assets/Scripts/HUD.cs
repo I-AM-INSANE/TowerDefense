@@ -18,7 +18,7 @@ public class HUD : MonoBehaviour
     int playerMoney;    // Монеты игрока
     int playerHealth;   // Здоровье игрока
     const string WavePrefix = "Wave: ";
-    const string WavePostfix = "/3";
+    string WavePostfix;
 
     private PlayerInfo playerInfo;
 
@@ -28,7 +28,7 @@ public class HUD : MonoBehaviour
 
     private void Awake()
     {
-
+        WavePostfix = '/' + GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerInfo>().TotalWaves.ToString();
     }
 
     private void Update()

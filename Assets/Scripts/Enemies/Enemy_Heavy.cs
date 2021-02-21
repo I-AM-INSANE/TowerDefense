@@ -10,6 +10,7 @@ public class Enemy_Heavy : Abstract_Enemy
     {
         enemySpeed = 1f;
         health = 200;
+        goldForThisEnemy = 15;
     }
 
     #endregion

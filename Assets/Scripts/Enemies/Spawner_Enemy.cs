@@ -19,7 +19,8 @@ public class Spawner_Enemy : MonoBehaviour
     private int enemyCounter;   // Количество врагов, вошедших в игру
 
     private int numOfWave = 0;    // Номер текущей волны
-
+    private int totalWaves = 3;   // Всего волн в этом уровне
+    private PlayerInfo playerInfo;
     #endregion
 
     #region Properties
@@ -31,6 +32,10 @@ public class Spawner_Enemy : MonoBehaviour
     #region Methods
     private void Awake()
     {
+        playerInfo = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerInfo>();
+        playerInfo.Wave = numOfWave;
+        playerInfo.TotalWaves = totalWaves;
+
         EnemiesOnScreen = new List<GameObject>();
         spawnTimer = gameObject.AddComponent<Timer>();
         spawnTimer.Duration = 1f;
@@ -42,24 +47,32 @@ public class Spawner_Enemy : MonoBehaviour
         if (spawnTimer.Finished)
             SpawnEnemy();
 
-        if (EnemiesOnScreen.Count == 0 && totalEnemies > 0 && enemyCounter == totalEnemies)
+        if (EnemiesOnScreen.Count == 0 && totalEnemies > 0 && enemyCounter == totalEnemies && numOfWave < totalWaves)
             NextWaveButtonOn();
+
+        if (EnemiesOnScreen.Count == 0 && totalEnemies > 0 && enemyCounter == totalEnemies && numOfWave == totalWaves)
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<StateManager>().EndBattleState(true);
     }
     public void GoToNextWave()
     {
         enemyCounter = 0;
         numOfWave++;
-        switch (numOfWave)
+        if (numOfWave <= totalWaves)
         {
-            case 1:
-                Wave1();
-                break;
-            case 2:
-                Wave2();
-                break;
-            case 3:
-                Wave3();
-                break;
+            playerInfo.Wave = numOfWave;
+
+            switch (numOfWave)
+            {
+                case 1:
+                    Wave1();
+                    break;
+                case 2:
+                    Wave2();
+                    break;
+                case 3:
+                    Wave3();
+                    break;
+            }
         }
         NextWaveButtonOff();
     }

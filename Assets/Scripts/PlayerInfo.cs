@@ -18,15 +18,21 @@ public class PlayerInfo : MonoBehaviour
 
     public int Wave { get; set; }
 
+    public int TotalWaves { get; set; }
+
     #endregion
 
     #region Methods
 
     private void Awake()
     {
-        PlayerHealth = 20;
+        PlayerHealth = 5;
         PlayerMoney = 200;
-        Wave = 1;
+    }
+    private void Update()
+    {
+        if (PlayerHealth == 0)
+            Camera.main.GetComponent<StateManager>().EndBattleState(true);
     }
 
     #endregion
